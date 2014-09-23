@@ -1,4 +1,6 @@
-upload
+Upload
 ======
 
-Handle file uploading.
+Handle file uploading and validation.
+
+
