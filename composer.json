@@ -1,6 +1,6 @@
 {
 	"name": "cohensive/upload",
-	"description": "Receive, validate and store uploaded files.",
+	"description": "Handle file uploading.",
 	"keywords": ["upload", "file", "html5"],
 	"license": "BSD-3-Clause",
 	"authors": [
