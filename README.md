@@ -61,8 +61,7 @@ if ($upload->passes()) {
 }
 ````
 
-What to do with uploaded files next is up to you and is out of the scope of his
-package.
+What to do with uploaded files next is out of the scope of Upload.
 
 #### Standalone
 
