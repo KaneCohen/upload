@@ -35,17 +35,27 @@ class Validator
      * @var array
      */
     protected $rules = [
-        'minSize'   => 0,
-        'maxSize'   => 10485760, // Maximum filesize: 10MB
-        'maxWidth'  => 0,
-        'maxHeight' => 0,
-        'minWidth'  => 0,
-        'minHeight' => 0,
-        'width'     => [],
-        'height'    => [],
-        'whiteExt'  => ['jpg', 'jpeg', 'gif', 'png'],
-        'blackExt'  => []
+        'minSize'   => 0,        // Minimum filesize.
+        'maxSize'   => 10485760, // Maximum filesize: 10MB.
+        'maxWidth'  => 0,        // Maximum image width if file is an image.
+        'maxHeight' => 0,        // Maximum image height if file is an image.
+        'minWidth'  => 0,        // Minimum image width if file is an image.
+        'minHeight' => 0,        // Minimum image height if file is an image.
+        'width'     => [],       // Image must have exact width (use array to set multiple).
+        'height'    => [],       // Image must have exact height (use array to set multiple).
+        'whiteExt'  => ['jpg', 'jpeg', 'gif', 'png'], // Array of allowed extensions.
+        'blackExt'  => []                             // Array of disallowed extensions.
     ];
+
+    /**
+     * Constructor.
+     *
+     * @param array $rules
+     */
+    public function __construct(array $rules = array())
+    {
+        $this->rules = array_merge($this->rules, $rules);
+    }
 
     /**
      * Validates File against rules.

@@ -23,12 +23,8 @@ class UploadServiceProvider extends ServiceProvider
     {
         $this->package('cohensive/upload');
         $this->app->bindShared('upload', function($app) {
-            $validator = new Validator();
-            $sanitizer = new LaravelStrSanitizer();
-            $fileFactory = new FileHandlerFactory();
             $options = $app['config']->get('upload::options');
-
-            return new Factory($validator, $sanitizer, $fileFactory, $options);
+            return new Factory($options);
         });
     }
 

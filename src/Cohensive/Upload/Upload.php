@@ -108,6 +108,16 @@ class Upload
     }
 
     /**
+     * Returns array of errors if there are any.
+     *
+     * @return array
+     */
+    public function getErrors()
+    {
+        return $this->getValidator()->getErrors();
+    }
+
+    /**
      * Receive file and store in the upload dir.
      *
      * @param  array $options
