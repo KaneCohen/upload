@@ -1,9 +1,8 @@
-Upload
-======
+# Upload
 
 Handle file uploading via standart HTML multipart form or via XHR data stream.
 
-### Usage
+## Usage
 
 Upload can be used alone as any class or as a package for Laravel 4 framework
 (if you'd like to add support to any other frameworks, write to the issues or
@@ -17,7 +16,7 @@ First, add following line to the list of requirements in composer.json:
 
 Run `composer install` or `composer update` to download it and autoload.
 
-#### Laravel 4
+### Laravel 4
 
 Get package config file - not required, but maybe handy if you have a lot of
 various upload fields and you want to change default Upload options.
@@ -46,7 +45,7 @@ In aliases add Upload facade:
 )
 ````
 
-##### Using in the code
+#### Using in the code
 
 ````php
 // Create new Upload instance.
@@ -63,7 +62,9 @@ if ($upload->passes()) {
 
 What to do with uploaded files next is out of the scope of Upload.
 
-#### Standalone
+-------
+
+### Standalone
 
 As a standalone package you'll have to instantiate several classes that Upload
 depends on. Namely:
@@ -93,7 +94,7 @@ $options = [...]; // An array of options for Upload, such as upload directory et
 $upload = new \Cohensive\Upload\Upload($validator, $sanitizer, $fileFactory, $options);
 ````
 
-##### Using in the code
+#### Using in the code
 
 ````php
 $rules = [...]; // An array of validation rules. Optional.
@@ -106,7 +107,7 @@ if ($upload->passes($rules)) {
 }
 ````
 
-#### Options
+### Options
 
 Uploader accets an array of options on instantiation:
 
