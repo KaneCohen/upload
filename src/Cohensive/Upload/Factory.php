@@ -17,7 +17,7 @@ class Factory
      *
      * @param array $options
      */
-    public function __construct(array $options = array())
+    public function __construct(array $options = [])
     {
         $this->options = $options;
     }
@@ -29,7 +29,7 @@ class Factory
      * @param array $rules
      * @return Upload
      */
-    public function make(array $options = array(), array $rules = array())
+    public function make(array $options = [], array $rules = [])
     {
         $validator = new Validator($rules);
         $sanitizer = new LaravelStrSanitizer();

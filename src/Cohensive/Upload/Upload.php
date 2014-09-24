@@ -76,7 +76,7 @@ class Upload
     public function __construct(Validator $validator,
         SanitizerInterface $sanitizer,
         FileHandlerFactory $fileFactory,
-        array $options = array()
+        array $options = []
     ) {
         $this->validator = $validator;
         $this->sanitizer = $sanitizer;
@@ -124,7 +124,7 @@ class Upload
      * @return FileHandlerInterface
      * @throws \Exception
      */
-    public function receive(array $options = array())
+    public function receive(array $options = [])
     {
         $this->setOptions($options);
         if ($this->passes()) {
@@ -149,7 +149,7 @@ class Upload
      * @param  array $options
      * @return void
      */
-    public function setOptions(array $options = array())
+    public function setOptions(array $options = [])
     {
         $this->options = array_merge($this->options, $options);
         $this->uploadDir = realpath(rtrim($this->options['uploadDir'], '/')) . DIRECTORY_SEPARATOR;

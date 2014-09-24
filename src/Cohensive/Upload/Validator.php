@@ -52,7 +52,7 @@ class Validator
      *
      * @param array $rules
      */
-    public function __construct(array $rules = array())
+    public function __construct(array $rules = [])
     {
         $this->rules = array_merge($this->rules, $rules);
     }
