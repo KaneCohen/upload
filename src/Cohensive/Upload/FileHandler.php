@@ -64,6 +64,16 @@ abstract class FileHandler implements FileHandlerInterface
     }
 
     /**
+     * Returns param name for the file.
+     *
+     * @return string
+     */
+    public function getParamName()
+    {
+        return $this->paramName;
+    }
+
+    /**
      * Returns file metadata.
      *
      * @return array
