@@ -50,7 +50,7 @@ In aliases add Upload facade:
 ````php
 // Create new Upload instance.
 // Both params are optional arrays. Description of allowed array items below.
-$upload = Upload::make($options, $rules);
+$upload = Upload::make($rules, $options);
 if ($upload->passes()) {
     // If file is valid, receive and store it in the uploads (set in options) directory.
     $upload->receive();
