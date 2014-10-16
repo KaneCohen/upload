@@ -105,7 +105,7 @@ abstract class FileHandler implements FileHandlerInterface
     public function getExtension()
     {
         $pathinfo = pathinfo($this->getName());
-        return $pathinfo['extension'];
+        return strtolower($pathinfo['extension']);
     }
 
     /**
