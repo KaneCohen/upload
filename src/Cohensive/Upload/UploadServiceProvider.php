@@ -24,7 +24,7 @@ class UploadServiceProvider extends ServiceProvider
         $this->package('cohensive/upload');
         $this->app->bindShared('upload', function($app) {
             $options = $app['config']->get('upload::options');
-            return new LaraveFactory($options);
+            return new LaravelFactory($options);
         });
     }
 
