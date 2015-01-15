@@ -206,26 +206,25 @@ class Upload
     protected function createTmpFile()
     {
         $name = $this->generateRandomString(20);
-        $file = $this->getFileHandler();
-        if (! $file->isAvailable()) {
-            throw new FileNotFoundException($file->getParamName());
+        $handler = $this->getFileHandler();
+        if (! $handler->isAvailable()) {
+            throw new FileNotFoundException($handler->getParamName());
         }
-        $file->save($this->tmpDir . $name . '.' . $file->getExtension());
-        return $file;
+        return $handler->save($this->tmpDir . $name . '.' . $handler->getExtension());
     }
 
     /**
      * Generate file name based on Upload options.
      *
-     * @param  FileHandlerInterface $file
+     * @param  File $file
      * @return string
      * @throws FileExistsException
      */
-    protected function prepareName(FileHandlerInterface $file)
+    protected function prepareName(File $file)
     {
-        $meta = $file->getMetadata();
+        $info = $file->getFileinfo();
 
-        $name = $meta['origname'];
+        $name = $info['origname'];
 
         if ($this->options['name']) {
             $name = $this->options['name'];
@@ -259,7 +258,7 @@ class Upload
             $this->options['suffix'],
             '', // place for auto sequencer (file_1, file_2, file_3)
             '.',
-            $meta['extension']
+            $info['extension']
         ];
 
         // check if the file already exists

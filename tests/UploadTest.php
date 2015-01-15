@@ -21,7 +21,9 @@ class UploadTest extends PHPUnit_Framework_TestCase
         $fileHandler->shouldReceive('getExtension')->andReturn('jpg');
         $fileHandler->shouldReceive('isAvailable')->andReturn(true);
         $fileHandler->shouldReceive('getName')->andReturn('foo');
-        $fileHandler->shouldReceive('getMetadata')->andReturn([
+
+        $file = m::mock('Cohensive\Upload\File');
+        $file->shouldReceive('getFileinfo')->andReturn([
             'type' => 'file',
             'path' => '/',
             'filename' => 'foo.jpg',
@@ -33,7 +35,7 @@ class UploadTest extends PHPUnit_Framework_TestCase
             'width' => 100,
             'height' => 200
         ]);
-        $fileHandler->shouldReceive('save')->andReturn(true);
+        $fileHandler->shouldReceive('save')->andReturn($file);
         $factory->shouldReceive('make')->andReturn($fileHandler);
         $upload = new Upload($validator, $sanitizer, $factory);
 
@@ -70,7 +72,9 @@ class UploadTest extends PHPUnit_Framework_TestCase
         $fileHandler->shouldReceive('isAvailable')->andReturn(true);
         $fileHandler->shouldReceive('getName')->andReturn('foo');
         $fileHandler->shouldReceive('getExtension')->andReturn('jpg');
-        $fileHandler->shouldReceive('getMetadata')->andReturn([
+
+        $file = m::mock('Cohensive\Upload\File');
+        $file->shouldReceive('getFileinfo')->andReturn([
             'type' => 'file',
             'path' => '/',
             'filename' => 'foo.jpg',
@@ -83,7 +87,7 @@ class UploadTest extends PHPUnit_Framework_TestCase
             'height' => 200
         ]);
         $factory->shouldReceive('make')->andReturn($fileHandler);
-        $fileHandler->shouldReceive('save')->andReturn(true);
+        $fileHandler->shouldReceive('save')->andReturn($file);
         $upload = new Upload($validator, $sanitizer, $factory);
 
         $this->assertInstanceOf('Cohensive\Upload\Upload', $upload);
@@ -107,7 +111,10 @@ class UploadTest extends PHPUnit_Framework_TestCase
         $fileHandler->shouldReceive('exists')->andReturn(true);
         $fileHandler->shouldReceive('isAvailable')->andReturn(true);
         $fileHandler->shouldReceive('getName')->andReturn('foo');
-        $fileHandler->shouldReceive('getMetadata')->andReturn([
+        $fileHandler->shouldReceive('getExtension')->andReturn('jpg');
+
+        $file = m::mock('Cohensive\Upload\File');
+        $file->shouldReceive('getFileinfo')->andReturn([
             'type' => 'file',
             'path' => '/',
             'filename' => 'foo',
@@ -122,9 +129,9 @@ class UploadTest extends PHPUnit_Framework_TestCase
             'height' => 200
         ]);
         $factory->shouldReceive('make')->andReturn($fileHandler, $fileHandler);
-        $fileHandler->shouldReceive('save')->andReturn(true);
-        $fileHandler->shouldReceive('move')->andReturn(true);
-        $fileHandler->shouldReceive('getExtension')->andReturn('jpg');
+        $fileHandler->shouldReceive('save')->andReturn($file);
+        $file->shouldReceive('move')->andReturn(true);
+
         $upload = new Upload($validator, $sanitizer, $factory);
         $upload->receive();
 

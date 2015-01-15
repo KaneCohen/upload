@@ -39,16 +39,16 @@ class PostHandler extends FileHandler
     /**
      * Saves file to the location.
      *
-     * @param  string $path
+     * @param  string $filepath
      * @return bool
      */
-    public function save($path)
+    public function save($filepath)
     {
-        $success = move_uploaded_file($this->store[$this->paramName]['tmp_name'], $path);
-        chmod($path, 0644);
+        $success = move_uploaded_file($this->store[$this->paramName]['tmp_name'], $filepath);
+        chmod($filepath, 0644);
         if ($success) {
-            $this->path = $path;
+            return new File($filepath);
         }
-        return $success;
+        throw new FileSaveException($this->getName());
     }
 }

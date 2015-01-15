@@ -8,20 +8,20 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
 
     public function testVlaidatorConstructor()
     {
-        $fileHandler = m::mock('Cohensive\Upload\FileHandlerInterface');
-        $fileHandler->shouldReceive('exists')->andReturn(true);
-        $fileHandler->shouldReceive('getMetadata')->once();
+        $file = m::mock('Cohensive\Upload\File');
+        $file->shouldReceive('exists')->andReturn(true);
+        $file->shouldReceive('getFileinfo')->once();
         $validator = new Validator();
-        $validator->setFile($fileHandler);
+        $validator->setFile($file);
 
         $this->assertInstanceOf('Cohensive\Upload\Validator', $validator);
     }
 
     public function testVlaidatorValidationSuccess()
     {
-        $fileHandler = m::mock('Cohensive\Upload\FileHandlerInterface');
-        $fileHandler->shouldReceive('exists')->andReturn(true);
-        $fileHandler->shouldReceive('getMetadata')->andReturn([
+        $file = m::mock('Cohensive\Upload\File');
+        $file->shouldReceive('exists')->andReturn(true);
+        $file->shouldReceive('getFileinfo')->andReturn([
             'type' => 'file',
             'path' => '/',
             'filename' => 'foo.jpg',
@@ -34,7 +34,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
             'height' => 200
         ]);
         $validator = new Validator();
-        $validator->setFile($fileHandler);
+        $validator->setFile($file);
 
         $this->assertTrue($validator->passes());
         $this->assertFalse($validator->fails());
@@ -42,9 +42,9 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
 
     public function testVlaidatorValidationFail()
     {
-        $fileHandler = m::mock('Cohensive\Upload\FileHandlerInterface');
-        $fileHandler->shouldReceive('exists')->andReturn(true);
-        $fileHandler->shouldReceive('getMetadata')->andReturn([
+        $file = m::mock('Cohensive\Upload\File');
+        $file->shouldReceive('exists')->andReturn(true);
+        $file->shouldReceive('getFileinfo')->andReturn([
             'type' => 'file',
             'path' => '/',
             'filename' => 'foo.jpg',
@@ -57,7 +57,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
             'height' => 200
         ]);
         $validator = new Validator();
-        $validator->setFile($fileHandler);
+        $validator->setFile($file);
         $validator->setRules(['whiteExt' => ['pdf']]);
 
         $this->assertFalse($validator->passes());

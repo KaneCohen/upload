@@ -1,26 +1,21 @@
 <?php
 namespace Cohensive\Upload;
 
-use Cohensive\Upload\FileHandlerInterface;
-use Cohensive\Upload\FileNotFoundException;
-use Cohensive\Upload\FolderNotFoundException;
-use Cohensive\Upload\FolderNotWritableException;
-
 class Validator
 {
     /**
-     * File handler.
+     * File to validate.
      *
-     * @var PostFileHandler|StreamFileHandler
+     * @var File
      */
     protected $file;
 
     /**
-     * File metadata.
+     * File info.
      *
      * @var array
      */
-    protected $metadata;
+    protected $fileinfo;
 
     /**
      * List of errors after validation.
@@ -70,7 +65,7 @@ class Validator
         }
 
         $this->emptyErrors();
-        $this->metadata = $this->file->getMetadata();
+        $this->fileinfo = $this->file->getFileinfo();
 
         foreach ($this->rules as $rule => $param) {
             $this->validate($rule, $param);
@@ -120,9 +115,9 @@ class Validator
     /**
      * Sets file.
      *
-     * @param FileHandlerInterface $file
+     * @param File $file
      */
-    public function setFile(FileHandlerInterface $file)
+    public function setFile(File $file)
     {
         $this->file = $file;
     }
@@ -200,7 +195,7 @@ class Validator
      */
     protected function validateMinSize($minSize)
     {
-        return $this->metadata['size'] >= (int) $minSize;
+        return $this->fileinfo['size'] >= (int) $minSize;
     }
 
     /**
@@ -211,7 +206,7 @@ class Validator
      */
     protected function validateMaxSize($maxSize)
     {
-        return $this->metadata['size'] <= (int) $maxSize;
+        return $this->fileinfo['size'] <= (int) $maxSize;
     }
 
     /**
@@ -238,10 +233,10 @@ class Validator
     protected function validateWidth($width)
     {
         if (is_array($width) && ! empty($width)) {
-            return in_array($this->metadata['width'], $width);
+            return in_array($this->fileinfo['width'], $width);
         } else {
             if (is_array($width)) return true;
-            return $this->metadata['width'] === (int) $width;
+            return $this->fileinfo['width'] === (int) $width;
         }
     }
 
@@ -254,10 +249,10 @@ class Validator
     protected function validateHeight($height)
     {
         if (is_array($height) && ! empty($height)) {
-            return in_array($this->metadata['height'], $height);
+            return in_array($this->fileinfo['height'], $height);
         } else {
             if (is_array($height)) return true;
-            return $this->metadata['height'] === (int) $height;
+            return $this->fileinfo['height'] === (int) $height;
         }
     }
 
@@ -269,7 +264,7 @@ class Validator
      */
     protected function validateMinWidth($minWidth)
     {
-        return $this->metadata['width'] >= (int) $minWidth;
+        return $this->fileinfo['width'] >= (int) $minWidth;
     }
 
     /**
@@ -280,7 +275,7 @@ class Validator
      */
     protected function validateMinHeight($minHeight)
     {
-        return $this->metadata['height'] >= (int) $minHeight;
+        return $this->fileinfo['height'] >= (int) $minHeight;
     }
 
     /**
@@ -291,7 +286,7 @@ class Validator
      */
     protected function validateMaxWidth($maxWidth)
     {
-        return $this->metadata['width'] <= (int) $maxWidth;
+        return $this->fileinfo['width'] <= (int) $maxWidth;
     }
 
     /**
@@ -302,7 +297,7 @@ class Validator
      */
     protected function validateMaxHeight($maxHeight)
     {
-        return $this->metadata['height'] <= (int) $maxHeight;
+        return $this->fileinfo['height'] <= (int) $maxHeight;
     }
 
     /**
@@ -314,9 +309,9 @@ class Validator
     protected function validateWhiteExt($exts)
     {
         if (is_array($exts)) {
-            return in_array($this->metadata['extension'], $exts);
+            return in_array($this->fileinfo['extension'], $exts);
         } else {
-            return $this->metadata['extension'] === $exts;
+            return $this->fileinfo['extension'] === $exts;
         }
     }
 
@@ -329,9 +324,9 @@ class Validator
     protected function validateBlackExt($exts)
     {
         if (is_array($exts)) {
-            return ! in_array($this->metadata['extension'], $exts);
+            return ! in_array($this->fileinfo['extension'], $exts);
         } else {
-            return $this->metadata['extension'] !== $exts;
+            return $this->fileinfo['extension'] !== $exts;
         }
     }
 

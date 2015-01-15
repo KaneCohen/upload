@@ -15,9 +15,9 @@ class FileHandlerFactory
         if ( ! isset($_SERVER['CONTENT_TYPE'])) {
             throw new FileNotFoundException($param);
         } else if (strpos(strtolower($_SERVER['CONTENT_TYPE']), 'multipart/') === 0) {
-            return new PostHandler($param);
+            return new PostFileHandler($param);
         } else {
-            return new StreamHandler($param);
+            return new StreamFileHandler($param);
         }
     }
 }

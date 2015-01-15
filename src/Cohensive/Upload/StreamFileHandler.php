@@ -44,13 +44,13 @@ class StreamHandler extends FileHandler
     /**
      * Saves file to the location.
      *
-     * @param  string $path
+     * @param  string $filepath
      * @return bool
      */
-    public function save($path)
+    public function save($filepath)
     {
         $input = fopen('php://input', 'r');
-        $target = fopen($path, 'w');
+        $target = fopen($filepath, 'w');
 
         fseek($target, 0, SEEK_SET);
         $realSize = stream_copy_to_stream($input, $target);
@@ -59,12 +59,10 @@ class StreamHandler extends FileHandler
         // Expected file size and actual file size must match.
         if ($realSize !== $this->getSize()) {
             unlink($target);
-            return false;
+            throw new FileSaveException($this->getName());
         }
 
-        chmod($path, 0644);
-        $this->path = $path;
-
-        return true;
+        chmod($filepath, 0644);
+        return new File($filepath);
     }
 }
