@@ -16,7 +16,7 @@ First, add following line to the list of requirements in composer.json:
 
 Run `composer install` or `composer update` to download it and autoload.
 
-### Laravel 4
+### Laravel 4/5
 
 Get package config file - not required, but maybe handy if you have a lot of
 various upload fields and you want to change default Upload options.
@@ -53,7 +53,8 @@ In aliases add Upload facade:
 $upload = Upload::make($rules, $options);
 if ($upload->passes()) {
     // If file is valid, receive and store it in the uploads (set in options) directory.
-    $upload->receive();
+    $file = $upload->receive();
+    // $file - is an instance of Cohensive\Upload\File class with various file-related attributes.
 } else {
     // Get array of errors - simple list of failed validation rules.
     $upload->getErrors();
@@ -100,11 +101,26 @@ $upload = new \Cohensive\Upload\Upload($validator, $sanitizer, $fileFactory, $op
 $rules = [...]; // An array of validation rules. Optional.
 if ($upload->passes($rules)) {
     // If file is valid, receive and store it in the uploads (set in options) directory.
-    $upload->receive();
+    $file = $upload->receive();
 } else {
     // Get array of errors - simple list of failed validation rules.
     $errors = $validator->getErrors();
 }
+````
+
+#### Handling file post-receive.
+
+After file has been successfully validated and saved, Upload will return `File`
+class instance which contains number of methods:
+
+````php
+$file->move($destination);           // Move file to another directory. Returns boolean.
+$file->delete();                     // Delete file.
+$file->getFileinfo();                // Returns array containing file information.
+$file->getFilepath();                // Returns path to the file.
+$file->getMimetype();                // Returns file MIME.
+$file->getExtension();               // Returns file extension.
+$file->isExists();                   // Checks if files exists. Returns boolean.
 ````
 
 ### Options

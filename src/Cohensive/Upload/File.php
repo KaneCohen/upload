@@ -39,7 +39,7 @@ class File
      */
     public function move($filepath)
     {
-        if ($this->exists()) {
+        if ($this->isExists()) {
             $success = rename($this->getFilepath(), $filepath);
             if ($success) {
                 $this->filepath = $filepath;
@@ -56,7 +56,7 @@ class File
      */
     public function delete()
     {
-        if ($this->exists()) {
+        if ($this->isExists()) {
             $this->filepath = null;
             return unlink($this->filepath);
         }
@@ -70,25 +70,18 @@ class File
      */
     public function getFileinfo($key = null, $default = null)
     {
-        $info = new SplFileInfo($this->filepath);
+        if ($this->isExists()) {
+            $info = new SplFileInfo($this->filepath);
 
-        $normalInfo = $this->normalizeFileInfo($info);
+            $normalInfo = $this->normalizeFileInfo($info);
 
-        if ($key) {
-            if (isset($normalInfo[$key])) return $normalInfo[$key];
-            return $default;
+            if ($key) {
+                if (isset($normalInfo[$key])) return $normalInfo[$key];
+                return $default;
+            }
+            return $normalInfo;
         }
-        return $normalInfo;
-    }
-
-    /**
-     * Sets filepath.
-     *
-     * @return array
-     */
-    public function setFilepath($filepath)
-    {
-        return $this->filepath = $filepath;
+        return null;
     }
 
     /**
@@ -128,7 +121,7 @@ class File
      *
      * @return bool
      */
-    public function exists()
+    public function isExists()
     {
         return $this->filepath && file_exists($this->filepath);
     }
