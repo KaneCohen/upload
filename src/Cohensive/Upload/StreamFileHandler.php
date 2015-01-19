@@ -1,7 +1,7 @@
 <?php
 namespace Cohensive\Upload;
 
-class StreamHandler extends FileHandler
+class StreamFileHandler extends FileHandler
 {
     /**
      * Constructor.
@@ -63,6 +63,6 @@ class StreamHandler extends FileHandler
         }
 
         chmod($filepath, 0644);
-        return new File($filepath);
+        return new File($filepath, $this->getName());
     }
 }

@@ -36,13 +36,13 @@ class Upload
         'tmpDir'      => 'uploads/tmp/', // Folder to keep files temporary for operations.
         'param'       => 'file',         // Parameter to access the file on.
         'name'        => '',             // Set new filename. Blank to use original name.
-        'nameLength'  => 32,             // Set maximum length of the name. Will be cut if longer.
+        'nameLength'  => 40,             // Set maximum length of the name. Will be cut if longer.
         'prefix'      => '',             // Add prefix to the filename..
         'suffix'      => '',             // Add suffix to the filename.
         'case'        => '',             // Convert file name to the case: 'lower', 'upper' or ''.
         'overwrite'   => false,          // If file already exists, overwrite it.
         'autoRename'  => true,           // In case if file with the same name exists append counter to the new file.
-        'randomize'   => false,          // Generate random filename. Boolean or integer for string length. Default length is 10.
+        'randomize'   => true,           // Generate random filename. Boolean or integer for string length. Default length is 10.
         'sanitize'    => true            // Sanitize filename - remove whitespaces and convert utf8 to ascii.
     ];
 
@@ -235,7 +235,7 @@ class Upload
         }
 
         if ($this->options['randomize']) {
-            $len = $this->options['randomize'] === true ? 10 : $this->options['randomize'];
+            $len = $this->options['randomize'] === true ? 40 : $this->options['randomize'];
             $name = $this->generateRandomString($len);
         }
 
@@ -307,7 +307,7 @@ class Upload
      * @param  int    $length
      * @return string
      */
-    protected function generateRandomString($length = 10)
+    protected function generateRandomString($length = 40)
     {
         $chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $rand = '';

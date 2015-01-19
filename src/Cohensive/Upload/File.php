@@ -14,13 +14,21 @@ class File
     protected $filepath;
 
     /**
+     * Original file name.
+     *
+     * @var string
+     */
+    protected $origname;
+
+    /**
      * Constructor.
      *
      * @param string $filepath
      */
-    public function __construct($filepath)
+    public function __construct($filepath, $origname)
     {
         $this->filepath = $filepath;
+        $this->origname = $origname;
     }
 
     /**
@@ -140,7 +148,7 @@ class File
             'filename' => $file->getFilename(),
             'filepath' => $file->getPathname(),
             'name' => substr($file->getFilename(), 0, strrpos($file->getFilename(), '.')),
-            'origname' => substr($this->getName(), 0, strrpos($this->getName(), '.')),
+            'origname' => substr($this->origname, 0, strrpos($this->origname, '.')),
             'extension' => $file->getExtension(),
             'mime' => $this->getMimetype(),
             'size' => $file->getSize(),

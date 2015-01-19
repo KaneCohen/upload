@@ -1,7 +1,7 @@
 <?php
 namespace Cohensive\Upload;
 
-class PostHandler extends FileHandler
+class PostFileHandler extends FileHandler
 {
     /**
      * Constructor.
@@ -47,7 +47,7 @@ class PostHandler extends FileHandler
         $success = move_uploaded_file($this->store[$this->paramName]['tmp_name'], $filepath);
         chmod($filepath, 0644);
         if ($success) {
-            return new File($filepath);
+            return new File($filepath, $this->getName());
         }
         throw new FileSaveException($this->getName());
     }

@@ -23,6 +23,7 @@ class UploadServiceProvider extends ServiceProvider
     {
         $this->app->bindShared('upload', function($app) {
             $options = $app['config']['upload.options'];
+            if ( ! is_null($options)) $options = [];
             return new LaravelFactory($options);
         });
     }
