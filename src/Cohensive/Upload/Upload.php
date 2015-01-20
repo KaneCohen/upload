@@ -124,7 +124,7 @@ class Upload
      * @return FileHandlerInterface
      * @throws \Exception
      */
-    public function receive(array $options = [])
+    public function save(array $options = [])
     {
         $this->setOptions($options);
         if ($this->passes()) {

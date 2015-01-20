@@ -60,7 +60,7 @@ class Validator
      */
     public function passes()
     {
-        if ($this->file === null || ! $this->file->exists()) {
+        if ($this->file === null || ! $this->file->isExists()) {
             throw new FileNotFoundException($this->options['paramName']);
         }
 

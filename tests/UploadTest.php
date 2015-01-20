@@ -17,7 +17,6 @@ class UploadTest extends PHPUnit_Framework_TestCase
         $sanitizer = m::mock('Cohensive\Upload\Sanitizer\SanitizerInterface');
         $factory = m::mock('Cohensive\Upload\FileHandlerFactory');
         $fileHandler = m::mock('Cohensive\Upload\FileHandlerInterface');
-        $fileHandler->shouldReceive('exists')->andReturn(true);
         $fileHandler->shouldReceive('getExtension')->andReturn('jpg');
         $fileHandler->shouldReceive('isAvailable')->andReturn(true);
         $fileHandler->shouldReceive('getName')->andReturn('foo');
@@ -68,7 +67,6 @@ class UploadTest extends PHPUnit_Framework_TestCase
         $sanitizer = m::mock('Cohensive\Upload\Sanitizer\SanitizerInterface');
         $factory = m::mock('Cohensive\Upload\FileHandlerFactory');
         $fileHandler = m::mock('Cohensive\Upload\FileHandlerInterface');
-        $fileHandler->shouldReceive('exists')->andReturn(true);
         $fileHandler->shouldReceive('isAvailable')->andReturn(true);
         $fileHandler->shouldReceive('getName')->andReturn('foo');
         $fileHandler->shouldReceive('getExtension')->andReturn('jpg');
@@ -108,7 +106,6 @@ class UploadTest extends PHPUnit_Framework_TestCase
         $sanitizer->shouldReceive('sanitize')->andReturn('foo');
         $factory = m::mock('Cohensive\Upload\FileHandlerFactory');
         $fileHandler = m::mock('Cohensive\Upload\FileHandlerInterface');
-        $fileHandler->shouldReceive('exists')->andReturn(true);
         $fileHandler->shouldReceive('isAvailable')->andReturn(true);
         $fileHandler->shouldReceive('getName')->andReturn('foo');
         $fileHandler->shouldReceive('getExtension')->andReturn('jpg');
@@ -133,7 +130,7 @@ class UploadTest extends PHPUnit_Framework_TestCase
         $file->shouldReceive('move')->andReturn(true);
 
         $upload = new Upload($validator, $sanitizer, $factory);
-        $upload->receive();
+        $upload->save();
 
         $this->assertInstanceOf('Cohensive\Upload\Upload', $upload);
         $this->assertTrue($upload->passes());
