@@ -9,7 +9,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
     public function testVlaidatorConstructor()
     {
         $file = m::mock('Cohensive\Upload\File');
-        $file->shouldReceive('exists')->andReturn(true);
+        $file->shouldReceive('isExists')->andReturn(true);
         $file->shouldReceive('getFileinfo')->once();
         $validator = new Validator();
         $validator->setFile($file);
@@ -20,7 +20,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
     public function testVlaidatorValidationSuccess()
     {
         $file = m::mock('Cohensive\Upload\File');
-        $file->shouldReceive('exists')->andReturn(true);
+        $file->shouldReceive('isExists')->andReturn(true);
         $file->shouldReceive('getFileinfo')->andReturn([
             'type' => 'file',
             'path' => '/',
@@ -43,7 +43,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
     public function testVlaidatorValidationFail()
     {
         $file = m::mock('Cohensive\Upload\File');
-        $file->shouldReceive('exists')->andReturn(true);
+        $file->shouldReceive('isExists')->andReturn(true);
         $file->shouldReceive('getFileinfo')->andReturn([
             'type' => 'file',
             'path' => '/',
