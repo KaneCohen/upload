@@ -15,6 +15,16 @@ class UploadServiceProvider extends ServiceProvider
     protected $defer = true;
 
     /**
+     * Boots the service provider.
+     */
+    public function boot()
+    {
+        $this->publishes([
+            __DIR__ . '/../config/config.php' => config_path('upload.php')
+        ]);
+    }
+
+    /**
      * Register the service provider.
      *
      * @return void
@@ -23,7 +33,6 @@ class UploadServiceProvider extends ServiceProvider
     {
         $this->app->bindShared('upload', function($app) {
             $options = $app['config']['upload.options'];
-            if ( ! is_null($options)) $options = [];
             return new LaravelFactory($options);
         });
     }

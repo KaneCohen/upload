@@ -15,11 +15,11 @@ class LaravelFactory
     /**
      * Constructor.
      *
-     * @param array $options
+     * @param mixed $options
      */
-    public function __construct(array $options = [])
+    public function __construct($options = [])
     {
-        $this->options = $options;
+        $this->options = (array) $options;
     }
 
     /**
