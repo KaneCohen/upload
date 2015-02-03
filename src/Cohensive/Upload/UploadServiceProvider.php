@@ -31,7 +31,7 @@ class UploadServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bindShared('upload', function($app) {
+        $this->app->singleton('upload', function($app) {
             $options = $app['config']['upload.options'];
             return new LaravelFactory($options);
         });
