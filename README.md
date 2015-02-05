@@ -1,6 +1,6 @@
 # Upload
 
-Handle file uploading via standart HTML multipart form or via XHR data stream.
+Handle file uploading via standard HTML multipart form or via XHR data stream.
 
 ## Usage
 
