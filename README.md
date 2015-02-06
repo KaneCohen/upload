@@ -54,7 +54,7 @@ $upload = Upload::make($rules, $options);
 if ($upload->passes()) {
     // If file is valid, receive and store it in the uploads (set in options) directory.
     $file = $upload->receive();
-    // $file - is an instance of Cohensive\Upload\File class with various file-related attributes.
+    // $file - is an instance of Cohensive\Upload\File class with various file-related attributes and methods.
 } else {
     // Get array of errors - simple list of failed validation rules.
     $upload->getErrors();
