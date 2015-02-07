@@ -31,9 +31,12 @@ class UploadServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->mergeConfigFrom(
+            __DIR__ . '/../../config/config.php', 'embed'
+        );
+
         $this->app->singleton('upload', function($app) {
-            $options = $app['config']['upload.options'];
-            return new LaravelFactory($options);
+            return new LaravelFactory($app['config']['upload.options']);
         });
     }
 
