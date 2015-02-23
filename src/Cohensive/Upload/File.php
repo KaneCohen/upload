@@ -137,9 +137,9 @@ class File
         $size = getimagesize($this->filepath);
         $normalized = [
             'type' => $file->getType(),
-            'path' => $file->getPathname(),
+            'path' => $file->getPathInfo()->getRealPath() . DIRECTORY_SEPARATOR,
             'filename' => $file->getFilename(),
-            'filepath' => $file->getPathname(),
+            'filepath' => $file->getRealPath(),
             'name' => substr($file->getFilename(), 0, strrpos($file->getFilename(), '.')),
             'origname' => substr($this->origname, 0, strrpos($this->origname, '.')),
             'extension' => $file->getExtension(),
