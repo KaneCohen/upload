@@ -52,8 +52,8 @@ In aliases add Upload facade:
 // Both params are optional arrays. Description of allowed array items below.
 $upload = Upload::make($rules, $options);
 if ($upload->passes()) {
-    // If file is valid, receive and store it in the uploads (set in options) directory.
-    $file = $upload->receive();
+    // If file is valid, save it in the uploads (set in options) directory.
+    $file = $upload->save();
     // $file - is an instance of Cohensive\Upload\File class with various file-related attributes and methods.
 } else {
     // Get array of errors - simple list of failed validation rules.
@@ -100,15 +100,15 @@ $upload = new \Cohensive\Upload\Upload($validator, $sanitizer, $fileFactory, $op
 ````php
 $rules = [...]; // An array of validation rules. Optional.
 if ($upload->passes($rules)) {
-    // If file is valid, receive and store it in the uploads (set in options) directory.
-    $file = $upload->receive();
+    // If file is valid, save it in the uploads (set in options) directory.
+    $file = $upload->save();
 } else {
     // Get array of errors - simple list of failed validation rules.
     $errors = $validator->getErrors();
 }
 ````
 
-#### Handling file post-receive.
+#### Handling file post-save.
 
 After file has been successfully validated and saved, Upload will return `File`
 class instance which contains number of methods:
