@@ -2,8 +2,8 @@
 
 return [
     'options' => [
-        'uploadDir'   => 'uploads/',     // Folder where all uploaded files will be saved to.
-        'tmpDir'      => 'uploads/tmp/', // Folder to keep files temporary for operations.
+        'uploadDir'   => 'uploads',     // Folder where all uploaded files will be saved to.
+        'tmpDir'      => 'uploads/tmp', // Folder to keep files temporary for operations.
         'param'       => 'file',         // Parameter to access the file on.
         'name'        => '',             // Set new filename. Blank to use original name.
         'nameLength'  => 40,             // Set maximum length of the name. Will be cut if longer.

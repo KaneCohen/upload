@@ -19,6 +19,7 @@ class FileTest extends PHPUnit_Framework_TestCase
     {
         $filepath = __DIR__ . '/file.txt';
         $file = new File($filepath, 'file');
+        $splInfo = new SplFileInfo($filepath);
         $info = [
             'type' => 'file',
             'path' => __DIR__ . '/',
@@ -29,11 +30,11 @@ class FileTest extends PHPUnit_Framework_TestCase
             'extension' => 'txt',
             'mime' => 'text/plain',
             'size' => 13,
-            'timestamp' => 1424448993,
+            'timestamp' => $splInfo->getMTime(),
             'width' => null,
             'height' => null
         ];
 
-        $this->assertEquals($file->getFileinfo(), $info);
+        $this->assertEquals($info, $file->getFileinfo());
     }
 }

@@ -32,8 +32,8 @@ class Upload
      * @var array
      */
     protected $options = [
-        'uploadDir'   => 'uploads/',     // Folder where all uploaded files will be saved to.
-        'tmpDir'      => 'uploads/tmp/', // Folder to keep files temporary for operations.
+        'uploadDir'   => 'uploads',     // Folder where all uploaded files will be saved to.
+        'tmpDir'      => 'uploads/tmp', // Folder to keep files temporary for operations.
         'param'       => 'file',         // Parameter to access the file on.
         'name'        => '',             // Set new filename. Blank to use original name.
         'nameLength'  => 40,             // Set maximum length of the name. Will be cut if longer.
@@ -129,7 +129,7 @@ class Upload
         $this->setOptions($options);
         if ($this->passes()) {
             $filename = $this->prepareName($this->file);
-            $filepath = $this->uploadDir . $filename;
+            $filepath = $this->uploadDir . '/' .  $filename;
 
             if ($this->file->move($filepath)) {
                 if (file_exists($filepath)) chmod($filepath, 0644);
@@ -152,8 +152,8 @@ class Upload
     public function setOptions(array $options = [])
     {
         $this->options = array_merge($this->options, $options);
-        $this->uploadDir = realpath(rtrim($this->options['uploadDir'], '/')) . DIRECTORY_SEPARATOR;
-        $this->tmpDir = realpath(rtrim($this->options['tmpDir'], '/')) . DIRECTORY_SEPARATOR;
+        $this->uploadDir = realpath(rtrim($this->options['uploadDir'], '/')) . '/';
+        $this->tmpDir = realpath(rtrim($this->options['tmpDir'], '/')) . '/';
         $this->validateOptions();
     }
 
@@ -262,13 +262,13 @@ class Upload
         ];
 
         // check if the file already exists
-        if (file_exists($this->uploadDir . implode('', $saveAs))) {
+        if (file_exists($this->uploadDir . '/' . implode('', $saveAs))) {
             if ($this->options['autoRename']) {
                 $counter = 0;
                 do {
-                    $saveAs[3] = '_'.++$counter;
+                    $saveAs[3] = '_' . ++$counter;
                 }
-                while (file_exists($this->uploadDir . implode('', $saveAs)));
+                while (file_exists($this->uploadDir . '/' . implode('', $saveAs)));
             } else {
                 if ( ! (bool) $this->options['overwrite']) {
                     throw new FileExistsException(implode('', $saveAs));
