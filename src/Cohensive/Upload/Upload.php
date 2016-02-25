@@ -129,7 +129,7 @@ class Upload
         $this->setOptions($options);
         if ($this->passes()) {
             $filename = $this->prepareName($this->file);
-            $filepath = $this->uploadDir . '/' .  $filename;
+            $filepath = $this->uploadDir . $filename;
 
             if ($this->file->move($filepath)) {
                 if (file_exists($filepath)) chmod($filepath, 0644);
@@ -262,13 +262,13 @@ class Upload
         ];
 
         // check if the file already exists
-        if (file_exists($this->uploadDir . '/' . implode('', $saveAs))) {
+        if (file_exists($this->uploadDir . implode('', $saveAs))) {
             if ($this->options['autoRename']) {
                 $counter = 0;
                 do {
                     $saveAs[3] = '_' . ++$counter;
                 }
-                while (file_exists($this->uploadDir . '/' . implode('', $saveAs)));
+                while (file_exists($this->uploadDir . implode('', $saveAs)));
             } else {
                 if ( ! (bool) $this->options['overwrite']) {
                     throw new FileExistsException(implode('', $saveAs));

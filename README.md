@@ -22,7 +22,10 @@ Get package config file - not required, but maybe handy if you have a lot of
 various upload fields and you want to change default Upload options.
 
 ````php
+// Laravel 4
 php artisan config:publish cohensive/upload
+// Laravel 5
+php artisan vendor:publish
 ````
 
 In `providers` array you need to add new package:
