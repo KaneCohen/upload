@@ -95,6 +95,16 @@ class File
     }
 
     /**
+     * Returns origname.
+     *
+     * @return string
+     */
+    public function getOrigname()
+    {
+        return $this->origname;
+    }
+
+    /**
      * Returns file MIME type.
      *
      * @return string
