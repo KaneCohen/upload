@@ -3,7 +3,7 @@ namespace Cohensive\Upload;
 
 use Cohensive\Upload\Sanitizer\LaravelStrSanitizer;
 
-class LaravelFactory
+class LaravelFactory implements UploadFactoryInterface
 {
     /**
      * Array of options.
