@@ -50,6 +50,6 @@ class UploadServiceProvider extends ServiceProvider
 
     public function provides()
     {
-        return ['upload'];
+        return [UploadFactoryInterface::class, LaravelFactory::class, 'upload'];
     }
 }
