@@ -13,13 +13,21 @@ class LaravelFactory implements UploadFactoryInterface
     protected $options;
 
     /**
+     * Array of validation rules.
+     *
+     * @var array
+     */
+    protected $rules;
+
+    /**
      * Constructor.
      *
      * @param mixed $options
      */
-    public function __construct($options = [])
+    public function __construct($config = [])
     {
-        $this->options = (array) $options;
+        $this->options = (array) $config['options'];
+        $this->rules = (array) $config['rules'];
     }
 
     /**
@@ -31,11 +39,13 @@ class LaravelFactory implements UploadFactoryInterface
      */
     public function make(array $rules = [], array $options = [])
     {
+        $rules = array_merge($this->rules, $rules);
+        $options = array_merge($this->options, $options);
+
         $validator = new Validator($rules);
         $sanitizer = new LaravelStrSanitizer();
         $fileFactory = new FileHandlerFactory();
 
-        $options = array_merge($this->options, $options);
         return new Upload($validator, $sanitizer, $fileFactory, $options);
     }
 }

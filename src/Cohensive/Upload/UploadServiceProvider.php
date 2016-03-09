@@ -36,15 +36,15 @@ class UploadServiceProvider extends ServiceProvider
         );
 
         $this->app->singleton('upload', function($app) {
-            return new LaravelFactory($app['config']['upload.options']);
+            return new LaravelFactory($app['config']['upload']);
         });
 
         $this->app->singleton(UploadFactoryInterface::class, function($app) {
-            return new LaravelFactory($app['config']['upload.options']);
+            return new LaravelFactory($app['config']['upload']);
         });
 
         $this->app->singleton(LaravelFactory::class, function($app) {
-            return new LaravelFactory($app['config']['upload.options']);
+            return new LaravelFactory($app['config']['upload']);
         });
     }
 
