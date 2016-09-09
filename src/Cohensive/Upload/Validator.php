@@ -31,7 +31,7 @@ class Validator
      */
     protected $rules = [
         'minSize'   => 0,             // Minimum filesize.
-        'maxSize'   => (2*1024*1024), // Maximum filesize: 2MB.
+        'maxSize'   => 2097152,       // Maximum filesize: 2MB.(2*1024*1024)
         'maxWidth'  => 0,             // Maximum image width if file is an image.
         'maxHeight' => 0,             // Maximum image height if file is an image.
         'minWidth'  => 0,             // Minimum image width if file is an image.
